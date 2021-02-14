@@ -5,17 +5,17 @@ import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
     show CalendarCarousel;
 
 void main() {
-  runApp(CalenderExample());
+  runApp(CalendarExample());
 }
 
-class CalenderExample extends StatefulWidget {
+class CalendarExample extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _CalenderExampleState();
+    return _CalendarExampleState();
   }
 }
 
-class _CalenderExampleState extends State<CalenderExample> {
+class _CalendarExampleState extends State<CalendarExample> {
   DateTime _currentDate = DateTime.now();
 
   void onDayPressed(DateTime date, List<Event> events) {
@@ -27,7 +27,7 @@ class _CalenderExampleState extends State<CalenderExample> {
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: AppBar(
-          title: Text("Calender Example"),
+          title: Text("Calendar Example"),
         ),
         body: Container(
           child: CalendarCarousel<Event>(

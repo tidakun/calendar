@@ -4,9 +4,9 @@ import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
     // show CalendarCarousel;
 
-void main() {
-  runApp(MaterialApp(home:CalendarExample()));
-}
+// void main() {
+//   runApp(MaterialApp(home:CalendarExample()));
+// }
 
 class CalendarExample extends StatefulWidget {
   @override

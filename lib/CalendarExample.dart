@@ -51,32 +51,50 @@ class _CalendarExampleState extends State<CalendarExample> {
 
   @override
   Widget build(BuildContext context) {
+    List<String> _memoList = [];
+
+
     return new Scaffold(
         appBar: AppBar(
           title: Text("Calendar Example"),
         ),
         body: Container(
-          child: CalendarCarousel<Event>(
-              onDayPressed: onDayPressed,
-              weekendTextStyle: TextStyle(color: Colors.red),
-              thisMonthDayBorderColor: Colors.grey,
-              weekFormat: false,
-              height: 420.0,
-              selectedDateTime: _currentDate,
-              daysHaveCircularBorder: false,
-              customGridViewPhysics: NeverScrollableScrollPhysics(),
-              markedDatesMap: _markedDateMap,  // 追加
-              markedDateShowIcon: true,
-              markedDateIconMaxShown: 2,
-              todayTextStyle: TextStyle(
-                color: Colors.blue,
-              ),
-              markedDateIconBuilder: (event) {
-                return event.icon;
-              },
-              todayBorderColor: Colors.green,
-              markedDateMoreShowTotal: false),
-        )
+          child: SingleChildScrollView(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  CalendarCarousel<Event>(
+                  onDayPressed: onDayPressed,
+                  weekendTextStyle: TextStyle(color: Colors.red),
+                  thisMonthDayBorderColor: Colors.grey,
+                  weekFormat: false,
+                  height: 420.0,
+                  selectedDateTime: _currentDate,
+                  daysHaveCircularBorder: false,
+                  customGridViewPhysics: NeverScrollableScrollPhysics(),
+                  markedDatesMap: _markedDateMap,  // 追加
+                  markedDateShowIcon: true,
+                  markedDateIconMaxShown: 2,
+                  todayTextStyle: TextStyle(
+                    color: Colors.blue,
+                  ),
+                  markedDateIconBuilder: (event) {
+                    return event.icon;
+                  },
+                  todayBorderColor: Colors.green,
+                  markedDateMoreShowTotal: false),
+                  TextField(
+                    enabled: true,
+                    maxLength: 20,
+                    maxLengthEnforced: false,
+                    style: TextStyle(color: Colors.black),
+                    obscureText: false,
+                    maxLines: 1,
+                  )
+                ]
+            )
+          )
+        ),
     );
   }
 }

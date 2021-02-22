@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
     // show CalendarCarousel;
 
 // void main() {
@@ -49,10 +50,17 @@ class _CalendarExampleState extends State<CalendarExample> {
     );
   } // 追加
 
+  TextEditingController _textEditingController;
+  @override
+  void initState() {
+    super.initState();
+    SharedPreferences.getInstance().then((prefs) {
+      _textEditingController = new TextEditingController(text: prefs.getString("memo")); // <- こんな感じ
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<String> _memoList = [];
-
 
     return new Scaffold(
         appBar: AppBar(
@@ -90,11 +98,30 @@ class _CalendarExampleState extends State<CalendarExample> {
                     style: TextStyle(color: Colors.black),
                     obscureText: false,
                     maxLines: 1,
+                    onChanged: (text) { _changeMemo(text); },
+                    controller: _textEditingController,
                   )
                 ]
             )
           )
         ),
     );
+  }
+
+  String memo;
+  List<String> _memoList = [];
+  void _changeMemo(String text){
+    setState(() {
+      memo = text;
+      storeMemo();
+    });
+  }
+
+  void storeMemo() async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final success = await prefs.setString("memo", memo);
+    if (!success) {
+      debugPrint("Failed to store value");
+    }
   }
 }
